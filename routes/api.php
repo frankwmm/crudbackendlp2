@@ -7,6 +7,7 @@ use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\CursoController;
 use App\Http\Controllers\API\PermisoController;
+use App\Http\Controllers\API\AlumnoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,5 +30,6 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('products', ProductController::class);
     Route::resource('curso', CursoController::class); 
     Route::resource('permiso', PermisoController::class); 
-
+    Route::resource('alumno', AlumnoController::class); 
+    
 });

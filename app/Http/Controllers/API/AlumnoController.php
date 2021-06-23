@@ -4,11 +4,11 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
-use App\Models\Product;
+use App\Models\Alumno;
 use Validator;
-use App\Http\Resources\Product as ProductResource;
+use App\Http\Resources\Alumno as AlumnoResource;
 
-class ProductController extends BaseController
+class AlumnoController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class ProductController extends BaseController
      */
     public function index()
     {
-        $products = Product::all();
+        $alumno= Alumno::all();
 
-        return $this->sendResponse(ProductResource::collection($products), 'Products retrieved successfully.');
+        return $this->sendResponse(AlumnoResource::collection($alumno), 'Alumnos retrieved successfully.');
     }
     /**
      * Store a newly created resource in storage.
@@ -40,9 +40,9 @@ class ProductController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $product = Product::create($input);
+        $alumno = Alumno::create($input);
 
-        return $this->sendResponse(new ProductResource($product), 'Product created successfully.');
+        return $this->sendResponse(new AlumnoResource($alumno), 'Alumno created successfully.');
     }
 
     /**
@@ -53,13 +53,13 @@ class ProductController extends BaseController
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $alumno = Alumno::find($id);
 
-        if (is_null($product)) {
-            return $this->sendError('Product not found.');
+        if (is_null($alumno)) {
+            return $this->sendError('Alumno not found.');
         }
 
-        return $this->sendResponse(new ProductResource($product), 'Product retrieved successfully.');
+        return $this->sendResponse(new AlumnoResource($alumno), 'Alumno retrieved successfully.');
     }
 
     /**
@@ -69,7 +69,7 @@ class ProductController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Alumno $alumno)
     {
         $input = $request->all();
 
@@ -82,11 +82,11 @@ class ProductController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $product->name = $input['name'];
-        $product->detail = $input['detail'];
-        $product->save();
+        $alumno->name = $input['name'];
+        $alumno->detail = $input['detail'];
+        $alumno->save();
 
-        return $this->sendResponse(new ProductResource($product), 'Product updated successfully.');
+        return $this->sendResponse(new AlumnoResource($alumno), 'Alumno updated successfully.');
     }
 
     /**
@@ -95,10 +95,10 @@ class ProductController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Alumno $alumno)
     {
-        $product->delete();
+        $alumno->delete();
 
-        return $this->sendResponse([], 'Product deleted successfully.');
+        return $this->sendResponse([], 'Alumno deleted successfully.');
     }
 }
